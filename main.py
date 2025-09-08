@@ -3,6 +3,8 @@ from tkinter import messagebox
 from tkinter import PhotoImage
 from PIL import Image, ImageTk
 from phone_control import CiscoPhoneController
+from immagine import IMAGE
+import base64, io
 
 class MainWindow:
     def __init__(self, master):
@@ -30,7 +32,9 @@ class MainWindow:
         self.img_label = tk.Label(image_frame)
         self.img_label.pack(side=tk.LEFT)
         tk.Button(image_frame, text="Refresh", command=self.refresh_screen).pack(side=tk.LEFT, padx=10)
-        self.display_image("immagine.png")
+        # self.display_image("immagine.png")
+        # Using embedded image in base64 for easier redistribution
+        self.display_default_image()
 
         # Frame dinamici dopo connessione
         self.keyboard_frame = None
@@ -38,6 +42,15 @@ class MainWindow:
         self.softkey_frame = None
         self.extra_frame = None
         self.exit_frame = None
+
+    def display_default_image(self):
+        # Decodifica l'immagine da Base64
+        img_data = base64.b64decode(IMAGE)
+        img = Image.open(io.BytesIO(img_data))
+        img = img.resize((375, 250), Image.LANCZOS)
+        self.photo = ImageTk.PhotoImage(img)
+        self.img_label.configure(image=self.photo)
+        self.img_label.image = self.photo
 
     def display_image(self, path):
         img = Image.open(path)
