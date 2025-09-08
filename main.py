@@ -37,6 +37,7 @@ class MainWindow:
         self.dpad_frame = None
         self.softkey_frame = None
         self.extra_frame = None
+        self.exit_frame = None
 
     def display_image(self, path):
         img = Image.open(path)
@@ -119,8 +120,12 @@ class MainWindow:
         tk.Button(self.extra_frame, text="Directory", command=lambda: self.press_button('Directory')).pack(side=tk.LEFT, padx=4)
         tk.Button(self.extra_frame, text="Applications", command=lambda: self.press_button('Applications')).pack(side=tk.LEFT, padx=4)
         
-        # Tasto Esci
-        tk.Button(self.master, text="Esci", command=self.master.quit).pack(pady=8)
+        # Tasto Esci (gestito come gli altri frame)
+        if self.exit_frame:  # Oppure crea una nuova variabile self.exit_frame
+            self.exit_frame.destroy()
+        self.exit_frame = tk.Frame(self.master)
+        self.exit_frame.pack(pady=8)
+        tk.Button(self.exit_frame, text="Esci", command=self.master.quit).pack()
         
         # Aumenta l'altezza a 750px
         self.master.geometry("500x820")

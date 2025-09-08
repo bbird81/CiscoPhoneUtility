@@ -53,7 +53,7 @@ class CiscoPhoneController:
         url = f"http://{self.ip}/CGI/Execute"
         data = f"XML=<CiscoIPPhoneExecute><ExecuteItem URL='Key:{value}'/></CiscoIPPhoneExecute>"
         resp = requests.post(url, data=data, headers=self._auth_header(), timeout=10)
-        sleep(2)
+        sleep(1)
         if resp.status_code not in [200, 204]:
             print(f"Payload Sent: {resp.request.headers}\n{resp.request.body}")
             raise Exception(f"Comando non accettato: {resp.status_code} - {resp.text}")
