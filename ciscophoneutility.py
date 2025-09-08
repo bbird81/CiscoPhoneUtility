@@ -8,7 +8,6 @@ if __name__ == "__main__":
     parser.add_argument('--debug', action='store_true', help='Attiva la modalità debug.')
     parser.add_argument('--showDP', action='store_true', help='Mostra la colonna "Device Pool" nel report.')
     parser.add_argument('--showUnregistered', action='store_true', help='Aggiunge i telefoni non registrati nel report.')
-    parser.add_argument('--cluster', type=str, help='Nome del cluster a cui collegarsi. Può essere [RS|TOP200|MZ]. Se assente, viene chiesto.')
     parser.add_argument('--dpname', type=str, help='Nome del device pool da controllare. Se assente, viene chiesto una porzione del nome da cercare.')
     args = parser.parse_args()
     if args.debug:
